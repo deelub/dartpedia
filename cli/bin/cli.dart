@@ -17,8 +17,18 @@ void main(List<String> arguments) {
 }
 
 void searchWikipedia(List<String>? arguments) {
-  // Add this new function and add ? to arguments type
-  print('searchWikipedia received arguments: $arguments');
+  final String articleTitle;
+
+  if (arguments == null || arguments.isEmpty) {
+    print('Please provide an article title');
+    articleTitle =
+        stdin.readLineSync() ?? ''; // give empty string if null input
+  } else {
+    articleTitle = arguments.join('');
+  }
+  print('Looking up articles about "$articleTitle". Please wait.');
+  print('Here ya go!');
+  print('(Pretend this is an article about "$articleTitle")');
 }
 
 void printUsuage() {

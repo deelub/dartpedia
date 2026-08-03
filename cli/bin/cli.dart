@@ -16,7 +16,7 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) {
+Future<void> searchWikipedia(List<String>? arguments) async {
   final String articleTitle;
 
   if (arguments == null || arguments.isEmpty) {
@@ -33,8 +33,11 @@ void searchWikipedia(List<String>? arguments) {
     articleTitle = arguments.join('');
   }
   print('Looking up articles about "$articleTitle". Please wait.');
-  print('Here ya go!');
-  print('(Pretend this is an article about "$articleTitle")');
+
+  var articleContent = await getWikipediaArticle(
+    articleTitle,
+  ); //Calling teh APi and waiting for the outputted results
+  print(articleContent);
 }
 
 void printUsuage() {

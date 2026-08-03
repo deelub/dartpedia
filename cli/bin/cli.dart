@@ -21,8 +21,14 @@ void searchWikipedia(List<String>? arguments) {
 
   if (arguments == null || arguments.isEmpty) {
     print('Please provide an article title');
-    articleTitle =
-        stdin.readLineSync() ?? ''; // give empty string if null input
+
+    final inputFromStdin = stdin.readLineSync();
+
+    if (inputFromStdin == null || inputFromStdin.isEmpty) {
+      print('No article title provided. Exiting');
+      return; //Handles no inplut to return nothing
+    }
+    articleTitle = inputFromStdin;
   } else {
     articleTitle = arguments.join('');
   }

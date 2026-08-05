@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
-import 'package:command_runner/command_runner.dart';
+import 'package:command_runner/src/arguments.dart';
 import 'arguments.dart';
 
 class CommandRunner {

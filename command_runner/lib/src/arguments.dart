@@ -108,16 +108,23 @@ abstract class Command extends Argument {
   String get usuage {
     return '$name: $description';
   }
+
+  // Add this method
+  FutureOr<Object?> run(ArgResults args);
 }
 
-FutureOr<Object?> run(ArgResults args) {}
+FutureOr<Object?> run(ArgResults args) {
+  // TODO: implement run
+}
 
 class ArgResults {
   Command? command;
   String? commandArg;
   Map<Option, Object?> options = {};
 
+  // Returns true if the flag exists.
   bool flag(String name) {
+    // Only check flags, because we're sure that flags are booleans.
     for (var option in options.keys.where(
       (option) => option.type == OptionType.flag,
     )) {

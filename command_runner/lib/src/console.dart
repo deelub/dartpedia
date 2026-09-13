@@ -34,12 +34,12 @@ enum ConsoleColor {
 
   static String get reset => '$ansiEscapeLiteral[0m';
 
-  /// Reset text and background color to terminal defaults
+  
 
   String applyForeground(String text) {
     return '$ansiEscapeLiteral[38;2;$r;$g;${b}m$text$reset';
 
-    /// Sets text color for the input
+   
   }
 
   String applyBackground(String text) {
@@ -47,5 +47,34 @@ enum ConsoleColor {
   }
 }
 
+extension TextRenderUtils on String {
+  String get errorText => ConsoleColor.red.applyForeground(this);
+  String get instructionText => ConsoleColor.yellow.applyForeground(this);
+  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
 
+  List<String> splitLinesByLength(int length) {
+    final List<String> words = split(' ');
+    final List<String> output = <String>[];
+    final StringBuffer strBuffer = StringBuffer();
+    for (int i = 0; i < words.length; i++) {
+      final String word = words[i];
+      if (strBuffer.length + word.length <= length) {
+        strBuffer.write(word.trim());
+        if (strBuffer.length + 1 <= length) {
+          strBuffer.write(' ');
+        }
+      }
+      // If the next word surpasses length, start the next line
+      if (i + 1 < words.length &&
+          words[i + 1].length + strBuffer.length + 1 > length) {
+        output.add(strBuffer.toString().trim());
+        strBuffer.clear();
+      }
+    }
+
+   
+    output.add(strBuffer.toString().trim());
+    return output;
+  }
+}
 //enum defining colours 

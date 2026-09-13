@@ -36,22 +36,31 @@ class CommandRunner {
     command.runner = this;
   }
 
-  ArgResults parse(List<String> input) {
-    var results = ArgResults();
+ ArgResults parse(List<String> input) {
+  ArgResults results = ArgResults();
+  if (input.isEmpty) return results;
+
+  if (_commands.containsKey(input.first)) {
     results.command = _commands[input.first];
+    input = input.sublist(1);
+  } else {
+    throw ArgumentException(
+      'The first word of input must be a command.',
+      null,
+      input.first,
+    );
+  }
 
-    if (input.isEmpty) return results;
-
-    if (_commands.containsKey(input.first)) {
-      results.command = _commands[input.first];
-      input = input.sublist(1);
-    } else {
-      throw ArgumentException(
-        'The first word of input must be a command.',
-        null,
-        input.first,
-      );
-    }
+ 
+  if (results.command != null &&
+      input.isNotEmpty &&
+      _commands.containsKey(input.first)) {
+    throw ArgumentException(
+      'Input can only contain one command. Got ${input.first} and ${results.command!.name}',
+      null,
+      input.first,
+    );
+  }
 
     if (results.command != null &&
         input.isNotEmpty &&
@@ -68,7 +77,7 @@ class CommandRunner {
     while (i < input.length) {
       if (input[i].startsWith('-')) {
         var base = _removeDash(input[i]);
-        // Throw an exception if an option is not recognized for the given command.
+     
         var option = results.command!.options.firstWhere(
           (option) => option.name == base || option.abbr == base,
           orElse: () {

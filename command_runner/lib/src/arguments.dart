@@ -38,6 +38,8 @@ class Option extends Argument {
   @override
   final String? valueHelp;
 
+  var usage;
+
   @override
   String get usuage {
     if (abbr != null) {

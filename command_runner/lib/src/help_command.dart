@@ -20,10 +20,11 @@ class HelpCommand extends Command {
 
   }
 
-  String _renderCommandVerbose(Command cmd) {
+  
+String _renderCommandVerbose(Command cmd) {
   final indent = ' ' * 10;
   final buffer = StringBuffer();
-  buffer.writeln(cmd.usage.instructionText); //abbr, name: description
+  buffer.writeln(cmd.usage?.instructionText); //abbr, name: description
   buffer.writeln('$indent ${cmd.help}');
   if (cmd.valueHelp != null) {
     buffer.writeln(
@@ -36,7 +37,6 @@ class HelpCommand extends Command {
   }
   return buffer.toString();
 }
-
 
 
   
@@ -85,4 +85,12 @@ FutureOr<String> run(ArgResults args) async {
 
   return buffer.toString();
 }
+}
+
+extension on Object? {
+  Object? get instructionText => null;
+}
+
+extension on Command {
+  Object? get usage => null;
 }

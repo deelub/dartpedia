@@ -1,0 +1,9 @@
+name: _
+publish_to: none 
+
+enviroment:
+  sdk : ^3.13.3
+workspace:
+  - cli
+  - command_runner
+  - wikipedia

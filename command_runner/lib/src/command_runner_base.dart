@@ -13,7 +13,7 @@ class CommandRunner {
   UnmodifiableSetView<Command> get commands =>
       UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
-  FutureOr<void> Function(Object)? onOutput;
+  FutureOr<void> Function(String)? onOutput;
 
   FutureOr<void> Function(Object)? onError;
 

@@ -1,8 +1,8 @@
 name: _
 publish_to: none 
 
-enviroment:
-  sdk : ^3.13.3
+environment:
+  sdk : '^3.13.4'
 workspace:
   - cli
   - command_runner
